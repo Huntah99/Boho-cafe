@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boho Café | Healthy & Bowl Rabat</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- BOHO BRAND PALETTE --- */
+        :root {
+            --orange: #FF8C42; /* Matches the orange wall */
+            --blue: #1D4E89;   /* Matches the counter/branding */
+            --cream: #FFF8F0;  /* Warm background */
+            --green: #4E9F3D;  /* For "Healthy" accents */
+            --text: #2D3436;
+            --white: #FFFFFF;
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background-color: var(--cream); 
+            color: var(--text); 
+            line-height: 1.6; 
+        }
+
+        h1, h2, h3, h4 { 
+            font-family: 'Fredoka', sans-serif; /* Rounded, cute font */
+            color: var(--blue);
+            letter-spacing: 0.5px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--orange);
+            color: var(--white);
+            border-radius: 50px; /* Fully rounded pills */
+            font-weight: 500;
+            text-decoration: none;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 140, 66, 0.3);
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(255, 140, 66, 0.4); }
+        .btn-blue { background-color: var(--blue); box-shadow: 0 4px 10px rgba(29, 78, 137, 0.3); }
+        .btn-blue:hover { box-shadow: 0 6px 15px rgba(29, 78, 137, 0.4); }
+
+        /* --- NAVBAR --- */
+        nav {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+        .logo { font-family: 'Fredoka', sans-serif; font-size: 1.8rem; color: var(--blue); font-weight: 600; }
+        .logo span { color: var(--orange); }
+        
+        .nav-links { display: none; } /* Hidden on mobile by default */
+        @media(min-width: 768px) {
+            .nav-links { display: flex; gap: 20px; }
+            .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; }
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(255, 248, 240, 0.8), rgba(255, 248, 240, 0.6)), url('https://images.unsplash.com/photo-1554118811-1e0d58224f24?q=80&w=2047&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+        .hero h1 { font-size: 3rem; margin-bottom: 15px; line-height: 1.2; }
+        .hero p { font-size: 1.2rem; color: var(--text); margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .tagline { color: var(--orange); font-weight: bold; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
+
+        /* --- HIGHLIGHTS STRIP --- */
+        .highlights {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: -30px;
+            padding-bottom: 50px;
+        }
+        .badge {
+            background: var(--white);
+            padding: 15px 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            color: var(--blue);
+        }
+
+        /* --- MENU SECTION --- */
+        .section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 50px; }
+        .section-header h2 { font-size: 2.5rem; }
+        .section-header p { color: #666; }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .menu-category h3 { color: var(--orange); border-bottom: 2px solid var(--orange); display: inline-block; margin-bottom: 20px; padding-bottom: 5px; }
+        
+        .menu-item {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.3s;
+        }
+        .menu-item:hover { transform: scale(1.02); }
+        .item-name { font-weight: 600; color: var(--blue); display: block; }
+        .item-desc { font-size: 0.85rem; color: #888; }
+        .price { font-weight: bold; color: var(--orange); background: var(--cream); padding: 5px 10px; border-radius: 10px; font-size: 0.9rem; }
+
+        /* --- PHOTO GALLERY --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .gallery-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+        .gallery-img:hover { transform: scale(1.03); }
+
+        /* --- INFO & REVIEWS --- */
+        .reviews-box {
+            background: var(--blue);
+            color: var(--white);
+            padding: 50px 30px;
+            border-radius: 30px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .stars { color: var(--orange); font-size: 1.5rem; }
+        .review-text { font-style: italic; font-size: 1.1rem; margin: 20px 0; }
+
+        /* --- INFO CONTAINER --- */
+        .info-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .hours-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed #eee; font-size: 0.9rem; }
+        .hours-row.today { color: var(--orange); font-weight: bold; }
+
+        /* --- FOOTER --- */
+        footer { text-align: center; padding: 40px 20px; color: #888; font-size: 0.9rem; }
+
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .badge { padding: 10px 15px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">BOHO <span>CAFÉ</span></div>
+        <a href="tel:0690036170" class="btn btn-blue" style="padding: 10px 20px; font-size: 0.8rem;">Call 0690-036170</a>
+    </nav>
+
+    <header class="hero">
+        <div>
+            <span class="tagline">Rabat's Cutest Spot</span>
+            <h1>Health & Bowl<br>Good Vibes Only</h1>
+            <p>Açaí bowls, fluffy pancakes, and artisanal coffee in a cozy, colorful setting. Come for the food, stay for the vibe.</p>
+            <a href="#menu" class="btn">View Menu</a>
+            <a href="#order" class="btn btn-blue" style="margin-left: 10px;">Order Now</a>
+        </div>
+    </header>
+
+    <div class="highlights">
+        <div class="badge">🥑 Healthy & Fresh</div>
+        <div class="badge">✨ 4.7 Star Rating</div>
+        <div class="badge">📶 Free WiFi</div>
+        <div class="badge">🥞 All Day Brunch</div>
+    </div>
+
+    <section id="menu" class="section">
+        <div class="section-header">
+            <h2>Menu Highlights</h2>
+            <p>From sweet treats to healthy eats. Price range: 50–100 MAD.</p>
+        </div>
+
+        <div class="menu-grid">
+            <div class="menu-category">
+                <h3>Brunch & Pancakes</h3>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Fluffy Pancakes</span>
+                        <span class="item-desc">Light, airy, and delicious.</span>
+                    </div>
+                    <span class="price">★ Popular</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Matinal Bagel</span>
+                        <span class="item-desc">Cream cheese, fresh veggies.</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Sweet Potato Waffle</span>
+                        <span class="item-desc">A healthy twist on a classic.</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Salted Pancakes</span>
+                        <span class="item-desc">Savory toppings.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Healthy Bowls</h3>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Açaí Bowl</span>
+                        <span class="item-desc">Antioxidant rich superfood.</span>
+                    </div>
+                    <span class="price">★ Must Try</span>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Rainbow Salad</span>
+                        <span class="item-desc">Fresh, colorful, nutritious.</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Mix Et Match</span>
+                        <span class="item-desc">Create your own bowl.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3>Sweets & Sips</h3>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Bissap</span>
+                        <span class="item-desc">Refreshing Hibiscus drink.</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Carrot Cake</span>
+                        <span class="item-desc">Moist and spiced perfectly.</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Cookies</span>
+                        <span class="item-desc">Gooey chocolate chip.</span>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <div>
+                        <span class="item-name">Café Crème</span>
+                        <span class="item-desc">Classic smooth coffee.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>The Boho Vibe</h2>
+        </div>
+        <div class="gallery-grid">
+            <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?q=80&w=800&auto=format&fit=crop" class="gallery-img" alt="Acai Bowl">
+            <img src="https://images.unsplash.com/photo-1552611052-33e04de081de?q=80&w=800&auto=format&fit=crop" class="gallery-img" alt="Cafe Interior">
+            <img src="https://images.unsplash.com/photo-1529312266912-b33cf6227e2f?q=80&w=800&auto=format&fit=crop" class="gallery-img" alt="Bagel">
+            <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?q=80&w=800&auto=format&fit=crop" class="gallery-img" alt="Pancakes">
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="reviews-box">
+            <div class="stars">★★★★★ 4.7</div>
+            <p class="review-text">"Cafe is so cute!! I would 100% go back and recommend to anyone. They have coffee, tea, smoothies..."</p>
+            <p>— Verified Review (Reported by 1,363 people)</p>
+        </div>
+    </section>
+
+    <section id="order" class="section" style="background-color: #F8FAFC;">
+        <div class="section-header">
+            <h2>Visit or Order</h2>
+        </div>
+        <div class="info-container">
+            <div>
+                <h3>Opening Hours</h3>
+                <br>
+                <div class="hours-row"><span>Monday</span> <span>9:00 AM – 9:00 PM</span></div>
+                <div class="hours-row"><span>Tuesday</span> <span>9:00 AM – 9:00 PM</span></div>
+                <div class="hours-row"><span>Wednesday</span> <span>9:00 AM – 9:00 PM</span></div>
+                <div class="hours-row"><span>Thursday</span> <span>9:00 AM – 9:00 PM</span></div>
+                <div class="hours-row"><span>Friday</span> <span>9:00 AM – 9:00 PM</span></div>
+                <div class="hours-row"><span>Saturday</span> <span>9:00 AM – 9:00 PM</span></div>
+                <div class="hours-row today"><span>Sunday</span> <span>10:00 AM – 9:00 PM</span></div>
+            </div>
+
+            <div>
+                <h3>Get in Touch</h3>
+                <br>
+                <p><strong>Address:</strong><br>10 Rue EL Yamama, Rabat 100<br>(Hassan District)</p>
+                <br>
+                <a href="https://www.google.com/maps/search/?api=1&query=Avenue+aljazira+arabia+n°40+salé+tabriquet" target="_blank" class="btn btn-blue" style="width: 100%; text-align: center; margin-bottom: 15px;">📍 Open Maps</a>
+                
+                <h3 style="margin-top: 20px;">Order Delivery</h3>
+                <p style="font-size: 0.9rem; margin-bottom: 10px;">Send us your order directly on WhatsApp:</p>
+                
+                <form id="whatsappForm">
+                    <input type="text" id="name" placeholder="Your Name" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px;">
+                    <textarea id="orderText" placeholder="I would like to order..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px; height: 80px;"></textarea>
+                    <button type="submit" class="btn" style="width: 100%;">Send via WhatsApp </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p><strong>Boho Café Rabat</strong></p>
+        <p>Healthy & Bowl | 0690-036170</p>
+        <br>
+        <p>© 2025 Boho Café. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 1. Get Data
+            var name = document.getElementById('name').value;
+            var order = document.getElementById('orderText').value;
+            
+            // 2. Business Number (From your data: 0690-036170 -> 212690036170)
+            var phone = "212690036170";
+            
+            // 3. Construct Message
+            var msg = "Hello Boho Cafe! My name is " + name + ".%0A%0A" + 
+                      "I would like to order:%0A" + order;
+            
+            // 4. Send
+            window.open("https://wa.me/" + phone + "?text=" + msg, '_blank');
+        });
+    </script>
+
+</body>
+</html>
